@@ -1,0 +1,55 @@
+﻿@{
+}
+ <script src="https://code.jquery.com/jquery-3.6.4.js"
+            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+@if (TempData["success"] != null)
+{
+       <script>
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+         
+            hideMethod: 'slideUp',
+            timeOut: 5000
+        };
+        toastr.success(`@TempData["success"]`);
+    </script>
+    TempData["success"] = null;
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+           
+            showMethod: 'slideDown',
+            hideMethod: 'slideUp',
+            timeOut: 6000
+        };
+        toastr.error(`@TempData["error"]`);
+    </script>
+    TempData["error"] = null;
+}
+@if (TempData["info"] != null)
+{
+      <script>
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            showMethod: 'slideDown',
+         
+            hideMethod: 'slideUp',
+            timeOut: 6000
+        };
+        toastr.info(`@TempData["info"]`);
+    </script>
+    TempData["info"] = null;
+
+}

@@ -1,0 +1,136 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Entities.PriceChangeDTO
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css"  type="text/css" />
+    <link rel="stylesheet" href="~/css/site.css"  type="text/css" />
+   
+     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+      <script src="~/js/bootstrap.bundle.js"></script>
+ <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    
+    </head>
+    <div class="container">
+        <partial name="_NotificationPartialView" />
+<form method="post" asp-action="Index" asp-controller="Item">
+    <div class="col-sm-12 col-md-6 form-group position-relative" style="border-right:0px;">
+        <label class="form-label">Select Multiple Items</label>
+        <button class="btn-dropdown btn dropdown-toggle form-select w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="textforfilter profiletext form-control" id="skillspan">
+                Select Items
+                <img id="arrow" src="~/Assets/drop-down.png" alt="dropdown-arrow" class="ic-down">
+            </span>
+        </button>
+        <ul class="dropdown-menu" style="width:96.5%;position:absolute">
+            @{
+                if (Model!.Items!.Any())
+                {
+                    @foreach (var item in Model.Items)
+                    {
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <div class="form-check">
+                                    <input class="form-check-input skill-checkbox" type="checkbox" value="@item.ItemCode" id="@item.ItemCode"
+                                   asp-for="ItemCodes" />
+                                    <span>@item.ItemName</span>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                }
+            }
+        </ul>
+        <span asp-validation-for="ItemCodes" class="text-danger">
+    </div>
+    <div class="col-sm-12 col-md-6 form-group">
+        <label class="form-label">Increase/Decrease</label>
+        <div class="d-flex gap-3">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="IncreaseDecrease" value="Increase" id="increaseRadio" name="IncreaseDecrease">
+            <label class="form-check-label" for="increaseRadio">
+                Increase
+            </label>
+        <span asp-validation-for="IncreaseDecrease" class="text-danger">
+
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="IncreaseDecrease" value="Decrease" id="decreaseRadio" name="IncreaseDecrease">
+            <label class="form-check-label" for="decreaseRadio">
+                Decrease
+            </label>
+        <span asp-validation-for="IncreaseDecrease" class="text-danger">
+
+        </div>
+        </div>
+    </div>
+
+     <div class="col-sm-12 col-md-6 form-group">
+        <label class="form-label">Value/Ratio</label>
+         <div class="d-flex gap-3">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="PriceType" value="$" id="value" name="PriceType">
+            <label class="form-check-label" for="increaseRadio">
+                Value ($)
+            </label>
+        <span asp-validation-for="PriceType" class="text-danger">
+
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="PriceType" value="%" id="ratio" name="PriceType">
+            <label class="form-check-label" for="decreaseRadio">
+               Ratio (%)
+            </label>
+        <span asp-validation-for="PriceType" class="text-danger">
+
+        </div>
+        </div>
+
+    </div>
+
+    <div class="col-sm-12 col-md-6 form-group">
+        <label class="form-label">Update Value</label>
+         <div class="d-flex gap-3">
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="PriceUpdate" value="Cost" id="costCheckbox" name="PriceUpdate">
+            <label class="form-check-label" for="costCheckbox">
+                Cost
+            </label>
+        <span asp-validation-for="PriceUpdate" class="text-danger">
+
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="PriceUpdate" value="Price" id="priceCheckbox" name="PriceUpdate">
+            <label class="form-check-label" for="priceCheckbox">
+                Price   
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="PriceUpdate" value="CostAndPrice" id="costAndPriceCheckbox" name="PriceUpdate">
+            <label class="form-check-label" for="costAndPriceCheckbox">
+                Both
+            </label>
+        <span asp-validation-for="PriceUpdate" class="text-danger">
+
+        </div>
+        </div>
+
+    </div>
+
+  
+    <div class="col-sm-12 col-md-6 form-group">
+        <label class="form-label">Price Amount</label>
+        <input class="form-control" type="number" asp-for="PriceAmount">
+        <span asp-validation-for="PriceAmount" class="text-danger">
+
+    </div>
+    <div class="col-sm-12 form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+</form>
+</div>
